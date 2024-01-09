@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 const AdminModel = require("../models/AdminModel");
 
 const registerAdmin = asyncHandler(async (req, res) => {
-    console.log(req);
     const { name, password } = req.body;
     if(!name) {
         res.status(401);
@@ -91,23 +90,19 @@ const updatePassword = asyncHandler(async (req, res) => {
 
 
 const deleteAdmin = asyncHandler(async (req, res) => {
-    const { name, password } = req.body;
-    if(!name) {
-        res.status(401);
-        throw new Error("Invalid name");
-    }
+    const { password } = req.body;
     if(!password){
         res.status(401);
         throw new Error("Invalid password");
     }
-    const existsWithName = await AdminModel.findOne({ name });
+    const existsWithName = await AdminModel.findById(req.params.id);
     if(!existsWithName){
         res.status(403);
         throw new Error("Admin not Found");
     }
     const comparePass = await bcrypt.compare(password, existsWithName.password);
     if(comparePass){
-        const admin = await AdminModel.findOneAndDelete({ name });
+        const admin = await AdminModel.findByIdAndDelete(req.params.id);
     }
     else {
         res.status(401);

@@ -158,7 +158,78 @@ method: "GET"
 
 return type: product object
 
-#### get all admins
+
+### Subscribers
+Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/subscribers/
+
+#### register subscriber
+
+relative Url: /register
+
+headers: None
+
+method: "POST"
+
+data: {
+    name: String,
+    password: String,
+    email: String,
+    address: String,
+    phone: String,
+    adminId: String(admins id in the browser)
+}
+
+return type: admin object
+
+#### login subscriber
+
+relative Url: /login
+
+headers: None
+
+method: "POST"
+
+data: {
+    name: String,
+    password: String
+}
+
+return type: jwt authentication key
+
+#### update subscriber
+
+relative Url: /:id
+
+headers: None
+
+method: "PUT"
+
+data: {
+    name: String,
+    password: String,
+    email: String,
+    address: String,
+    phone: String,
+    adminId: String(admins id in the browser)
+}
+
+return type: admin object
+
+#### delete subscriber
+
+relative Url: /:id
+
+headers: None
+
+method: "DELETE"
+
+data: {
+    password: String
+}
+
+return type: json object
+
+#### get all subscribers
 
 relative Url: /all
 
@@ -168,19 +239,17 @@ headers: {
     Authorization: "Bearer __jwt_Authentication_key_after_login"
 }
 
-return type: list of product object
+return type: list of subscriber objects
 
-#### get single product image
+#### get single subscriber
 
-relative Url: /product_image/:id
+relative Url: /:id
 
 method: "GET"
 
-headers: {
-    Authorization: "Bearer __jwt_Authentication_key_after_login"
-}
+headers: None
 
-return type: file object
+return type: subscriber object
 
 #### Further Api services will be updated soon ...
 thank you for your support

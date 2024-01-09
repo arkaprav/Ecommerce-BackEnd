@@ -7,7 +7,7 @@ router.route('/:id').get(getSingleAdmin);
 router.route('/login').post(loginAdmin);
 router.route('/register').post(registerAdmin);
 router.route('/update').put(updatePassword);
-router.route('/delete').delete(deleteAdmin);
+router.route('/delete/:id').delete(deleteAdmin);
 
 
 module.exports = router;

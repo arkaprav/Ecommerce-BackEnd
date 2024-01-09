@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 
 const path = require("path");
 const ProductsModel = require("../models/ProductsModel");
-const axios = require("axios");
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);

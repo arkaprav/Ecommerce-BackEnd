@@ -5,6 +5,8 @@ const app = express();
 const errorHandler = require("./middlewares/errorHandlers");
 const adminRoutes = require("./routes/AdminRoutes");
 const productRoutes = require("./routes/ProductRoutes");
+const subscribersRoutes = require("./routes/SubscriberRoutes");
+const subscriberSecureRoute = require("./routes/SubscribersSecureRoutes");
 const ConnectDB = require("./config/dbConfig");
 
 ConnectDB();
@@ -26,6 +28,8 @@ app.use(cors({
 app.use(express.json());
 app.use("/api/admins/", adminRoutes);
 app.use("/api/products/", productRoutes);
+app.use("/api/subscribers/", subscribersRoutes);
+app.use("/api/subscribers/secure/", subscriberSecureRoute);
 app.use(errorHandler);
 
 module.exports = app;
