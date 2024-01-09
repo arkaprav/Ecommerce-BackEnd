@@ -26,10 +26,6 @@ const SubscriberSchema = mongoose.Schema(
             type: String,
             default: "[]"
         },
-        adminId: {
-            type: String,
-            required: [true, "adminId is required"]
-        },
     },{
         timestamps: true
     }

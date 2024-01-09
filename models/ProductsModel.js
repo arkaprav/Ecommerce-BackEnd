@@ -25,10 +25,6 @@ const productsSchema = mongoose.Schema(
             type: String,
             required: [true, "ImagePath is required"],
         },
-        adminId:{
-            type: String,
-            required: [true, "adminId is required"],
-        },
     },{
         timestmps: true
     }

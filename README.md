@@ -94,7 +94,7 @@ Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/produc
 
 #### create product
 
-relative Url: /
+relative Url: /secure/
 
 headers: {
     Authorization: "Bearer __jwt_Authentication_key_after_login"
@@ -115,7 +115,7 @@ return type: product object
 
 #### update product
 
-relative Url: /:id
+relative Url: /secure/:id
 
 headers:  {
     Authorization: "Bearer __jwt_Authentication_key_after_login"
@@ -136,7 +136,7 @@ return type: product object
 
 #### delete product
 
-relative Url: /:id
+relative Url: /secure/:id
 
 headers: {
     Authorization: "Bearer __jwt_Authentication_key_after_login"
@@ -157,6 +157,27 @@ headers: {
 method: "GET"
 
 return type: product object
+
+#### get all products
+
+relative Url: /all
+
+headers: None
+
+method: "GET"
+
+return type: product object
+
+
+#### get single product image
+
+relative Url: /product_image/:id
+
+headers: None
+
+method: "GET"
+
+return type: image file
 
 
 ### Subscribers
@@ -235,9 +256,7 @@ relative Url: /all
 
 method: "GET"
 
-headers: {
-    Authorization: "Bearer __jwt_Authentication_key_after_login"
-}
+headers: None
 
 return type: list of subscriber objects
 

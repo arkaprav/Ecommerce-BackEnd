@@ -5,14 +5,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const SubscribersModel = require("../models/SubscribersModel");
-const AdminModel = require("../models/AdminModel");
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 const registerSubscriber = asyncHandler(async (req, res) => {
-    const { name, password, address, email, phone, adminId } = req.body;
+    const { name, password, address, email, phone } = req.body;
     if(!name) {
         res.status(401);
         throw new Error("Invalid name");
@@ -26,11 +25,6 @@ const registerSubscriber = asyncHandler(async (req, res) => {
         throw new Error("Invalid email");
     }
     if(!address){
-        res.status(401);
-        throw new Error("Invalid address");
-    }
-    const admin = await AdminModel.findOne({ _id: adminId });
-    if(!admin){
         res.status(401);
         throw new Error("Invalid address");
     }
@@ -49,8 +43,7 @@ const registerSubscriber = asyncHandler(async (req, res) => {
         password: hashedPass,
         address,
         email,
-        phone,
-        adminId
+        phone
     });
     res.status(201).json(subscriber);
 });
@@ -119,7 +112,7 @@ const deleteSubscriber = asyncHandler(async (req, res) => {
     }
     const comparePass = await bcrypt.compare(password, existsWithName.password);
     if(comparePass){
-        const admin = await SubscribersModel.findByIdAndDelete(req.params.id);
+        const subscriber = await SubscribersModel.findByIdAndDelete(req.params.id);
     }
     else {
         res.status(401);
@@ -129,7 +122,7 @@ const deleteSubscriber = asyncHandler(async (req, res) => {
 });
 
 const getAllSubscribers = asyncHandler(async (req, res) => {
-    const subscriber = await SubscribersModel.find({ adminId: req.admin.id });
+    const subscriber = await SubscribersModel.find();
     res.status(200).json(subscriber);
 });
 

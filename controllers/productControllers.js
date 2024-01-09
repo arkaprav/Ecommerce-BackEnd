@@ -8,7 +8,6 @@ function isNumeric(n) {
 }
 
 const createProduct = asyncHandler(async (req, res) => {
-    console.log(req.body);
     const { name, brand, description, purchasePrice, retailPrice } = req.body;
     if(!name){
         res.status(401);
@@ -18,8 +17,6 @@ const createProduct = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Invalid brand");
     }
-    console.log(isNumeric(purchasePrice));
-    console.log(isNumeric(retailPrice));
     if(!isNumeric(purchasePrice)){
         res.status(401);
         throw new Error("Invalid purchasePrice");
@@ -41,7 +38,6 @@ const createProduct = asyncHandler(async (req, res) => {
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
         imagePath,
-        adminId: req.admin.id
     });
     const product = await ProductsModel.create({
         name,
@@ -50,18 +46,17 @@ const createProduct = asyncHandler(async (req, res) => {
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
         imagePath,
-        adminId: req.admin.id
     });
     res.status(200).json(product);
 });
 
 const getAllProducts = asyncHandler(async (req, res) => {
-    const products = await ProductsModel.find({ adminId: req.admin.id });
+    const products = await ProductsModel.find();
     res.status(200).json(products);
 });
 
 const getSingleProduct = asyncHandler(async (req, res) => {
-    const product = await ProductsModel.findOne({ _id: req.params.id, adminId: req.admin.id });
+    const product = await ProductsModel.findOne({ _id: req.params.id });
     if(!product) {
         res.status(404);
         throw new Error("Product not found");
@@ -70,7 +65,7 @@ const getSingleProduct = asyncHandler(async (req, res) => {
 });
 
 const deleteProduct = asyncHandler(async (req, res) => {
-    const product = await ProductsModel.findOne({ _id: req.params.id, adminId: req.admin.id });
+    const product = await ProductsModel.findOne({ _id: req.params.id });
     if(!product){
         res.status(404);
         throw new Error("Product not found");
@@ -79,7 +74,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
-    const product = await ProductsModel.findOne({ _id: req.params.id, adminId: req.admin.id });
+    const product = await ProductsModel.findOne({ _id: req.params.id });
     if(!product){
         res.status(404);
         throw new Error("Product not found");
@@ -92,12 +87,12 @@ const updateProduct = asyncHandler(async (req, res) => {
         ...req.body,
         imagePath
     };
-    const updatedProduct = await ProductsModel.findByIDAndUpdate(req.params.id, req.body);
+    const updatedProduct = await ProductsModel.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json(updatedProduct);
 });
 
 const getProductImage = asyncHandler(async (req, res) => {
-    const product = await ProductsModel.findOne({ _id: req.params.id, adminId: req.admin.id });
+    const product = await ProductsModel.findOne({ _id: req.params.id });
     if(!product){
         res.status(404);
         throw new Error("Product not found");
