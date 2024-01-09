@@ -4,7 +4,7 @@
 An Api for Ecommerce app using express and mongo DB database
 
 ## Usage
-there are currently two api services for admins and products
+there are currently three api services for admins, subscribers and products
 
 ### Admins
 Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/admins/
