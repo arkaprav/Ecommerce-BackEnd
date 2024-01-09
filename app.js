@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const errorHandler = require("./middlewares/errorHandlers");
 const adminRoutes = require("./routes/AdminRoutes");
+const productRoutes = require("./routes/ProductRoutes");
 const ConnectDB = require("./config/dbConfig");
 
 ConnectDB();
@@ -24,6 +25,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use("/api/admins/", adminRoutes);
+app.use("/api/products/", productRoutes);
 app.use(errorHandler);
 
 module.exports = app;

@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const AdminModel = require("../models/AdminModel");
 
 const registerAdmin = asyncHandler(async (req, res) => {
+    console.log(req);
     const { name, password } = req.body;
     if(!name) {
         res.status(401);
