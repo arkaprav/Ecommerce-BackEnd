@@ -3,11 +3,10 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 const errorHandler = require("./middlewares/errorHandlers");
-const testRoutes = require("./routes/testRoutes");
+const adminRoutes = require("./routes/AdminRoutes");
 const ConnectDB = require("./config/dbConfig");
 
 ConnectDB();
-
 
 app.use(cors({
   origin: function(origin, callback){
@@ -24,7 +23,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use("/api/test/", testRoutes);
+app.use("/api/admins/", adminRoutes);
 app.use(errorHandler);
 
 module.exports = app;
