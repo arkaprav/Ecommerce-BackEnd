@@ -8,7 +8,7 @@ function isNumeric(n) {
 }
 
 const createProduct = asyncHandler(async (req, res) => {
-    const { name, brand, description, purchasePrice, retailPrice } = req.body;
+    const { name, brand, description, categoryId, purchasePrice, retailPrice } = req.body;
     if(!name){
         res.status(401);
         throw new Error("Invalid name");
@@ -31,18 +31,11 @@ const createProduct = asyncHandler(async (req, res) => {
     }else {
         imagePath = path.join(__dirname, "products", "default.png");
     }
-    console.log({
-        name,
-        description: description ? description : "",
-        brand,
-        purchasePrice: parseFloat(purchasePrice),
-        retailPrice: parseFloat(retailPrice),
-        imagePath,
-    });
     const product = await ProductsModel.create({
         name,
         description: description ? description : "",
         brand,
+        categoryId,
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
         imagePath,

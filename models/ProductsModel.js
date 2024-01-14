@@ -9,6 +9,10 @@ const productsSchema = mongoose.Schema(
         description: {
             type: String,
         },
+        categoryId: {
+            type: String,
+            default: ""
+        },
         brand:{
             type: String,
             required: [true, "brand is required"],

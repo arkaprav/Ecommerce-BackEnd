@@ -189,6 +189,7 @@ data: {
     name: String,
     description: String,
     brand: String,
+    catgeoryId: String,
     purchasePrice: Number,
     retailPrice: Number,
     product_image: Image File
@@ -210,6 +211,7 @@ data: {
     name: String,
     description: String,
     brand: String,
+    catgeoryId: String,
     purchasePrice: Number,
     retailPrice: Number,
     product_image: Image File
