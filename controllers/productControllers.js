@@ -70,7 +70,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Product not found");
     }
-    res.status(200).json(product);
+    const deletedProduct = await ProductsModel.findByIdAndDelete(req.params.id);
+    res.status(200).json(deletedProduct);
 });
 
 const updateProduct = asyncHandler(async (req, res) => {

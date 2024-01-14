@@ -7,6 +7,8 @@ const adminRoutes = require("./routes/AdminRoutes");
 const productRoutes = require("./routes/ProductRoutes");
 const subscribersRoutes = require("./routes/SubscriberRoutes");
 const productSecureRoutes = require("./routes/ProductSecureRoutes");
+const categoryRoutes = require("./routes/CategoryRoutes");
+const categorySecureRoutes = require("./routes/CategorySecureRoutes");
 const ConnectDB = require("./config/dbConfig");
 
 ConnectDB();
@@ -29,6 +31,8 @@ app.use(express.json());
 app.use("/api/admins/", adminRoutes);
 app.use("/api/products/", productRoutes);
 app.use("/api/products/secure/", productSecureRoutes);
+app.use("/api/category/", categoryRoutes);
+app.use("/api/category/secure/", categorySecureRoutes);
 app.use("/api/subscribers/", subscribersRoutes);
 app.use(errorHandler);
 

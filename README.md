@@ -89,6 +89,89 @@ headers: None
 
 return type: admin object
 
+### Categorys
+Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/category/
+
+#### create product
+
+relative Url: /secure/
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "POST"
+
+data: {
+    name: String,
+    description: String,
+    category_image: Image File
+}
+
+return type: category object
+
+#### update category
+
+relative Url: /secure/:id
+
+headers:  {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "PUT"
+
+data: {
+    name: String,
+    description: String,
+    no_of_products: Number
+    category_image: Image File
+}
+
+return type: category object
+
+#### delete category
+
+relative Url: /secure/:id
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "DELETE"
+
+return type: json object
+
+#### get single category
+
+relative Url: /:id
+
+headers: None
+
+method: "GET"
+
+return type: product object
+
+#### get all category
+
+relative Url: /all
+
+headers: None
+
+method: "GET"
+
+return type: category object
+
+
+#### get single category image
+
+relative Url: /category_image/:id
+
+headers: None
+
+method: "GET"
+
+return type: image file
+
 ### Products
 Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/products/
 
@@ -150,9 +233,7 @@ return type: json object
 
 relative Url: /:id
 
-headers: {
-    Authorization: "Bearer __jwt_Authentication_key_after_login"
-}
+headers: None
 
 method: "GET"
 
