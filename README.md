@@ -448,5 +448,75 @@ headers: None
 
 return type: order object
 
+### Transactions
+Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/transactions/
+
+#### create transactions
+
+relative Url: /
+
+headers: None
+
+method: "POST"
+
+data: {
+    orderId: String (order ID),
+    customerId: String (Subscriber's ID),
+    paymentStatus: String,
+    amountPaid: Number,
+    mop: String
+}
+
+return type: transaction object
+
+#### update transaction
+
+relative Url: /:id
+
+headers: None
+
+method: "PUT"
+
+data: {
+    orderId: String (order ID),
+    customerId: String (Subscriber's ID),
+    paymentStatus: String,
+    amountPaid: Number,
+    mop: String
+}
+
+return type: transaction object
+
+#### delete transaction
+
+relative Url: /:id
+
+headers: None
+
+method: "DELETE"
+
+return type: json object
+
+#### get all transaction
+
+relative Url: /all
+
+method: "GET"
+
+headers: None
+
+return type: list of trnsaction objects
+
+#### get single transaction
+
+relative Url: /:id
+
+method: "GET"
+
+headers: None
+
+return type: transaction object
+
+
 #### Further Api services will be updated soon ...
 thank you for your support
