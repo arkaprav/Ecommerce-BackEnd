@@ -9,6 +9,7 @@ const subscribersRoutes = require("./routes/SubscriberRoutes");
 const productSecureRoutes = require("./routes/ProductSecureRoutes");
 const categoryRoutes = require("./routes/CategoryRoutes");
 const categorySecureRoutes = require("./routes/CategorySecureRoutes");
+const OrdersRoutes = require("./routes/ordersRoutes");
 const ConnectDB = require("./config/dbConfig");
 
 ConnectDB();
@@ -34,6 +35,7 @@ app.use("/api/products/secure/", productSecureRoutes);
 app.use("/api/category/", categoryRoutes);
 app.use("/api/category/secure/", categorySecureRoutes);
 app.use("/api/subscribers/", subscribersRoutes);
+app.use("/api/orders/", OrdersRoutes);
 app.use(errorHandler);
 
 module.exports = app;

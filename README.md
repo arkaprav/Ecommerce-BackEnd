@@ -353,5 +353,100 @@ headers: None
 
 return type: subscriber object
 
+### Orders
+Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/orders/
+
+#### create order
+
+relative Url: /
+
+headers: None
+
+method: "POST"
+
+data: {
+    customerId: String (Subscriber's ID),
+    products: Array of JSON Object({
+        ID: String (Product ID),
+        quantity: Number,
+        SingleItemPrice: Number,
+        SingleItemDiscount: Number (optional),
+        SingleItemDiscountedPrice: Number,
+        ProductCartTotal: Number,
+        ProductCartSpecialDiscount: Number (optional),
+        ProductCartTotal: Number
+    }),
+    orderTotal: Number,
+    orderDiscount: Number,
+    orderDiscountedTotal: Number,
+    amountPaid: Number,
+    paymentStatus: String,
+    delivaryStatus: String,
+    mop: String
+}
+
+return type: order object
+
+#### update Order
+
+relative Url: /:id
+
+headers: None
+
+method: "PUT"
+
+data: {
+    customerId: String (Subscriber's ID),
+    products: Array of JSON Object({
+        ID: String (Product ID),
+        quantity: Number,
+        SingleItemPrice: Number,
+        SingleItemDiscount: Number (optional),
+        SingleItemDiscountedPrice: Number,
+        ProductCartTotal: Number,
+        ProductCartSpecialDiscount: Number (optional),
+        ProductCartTotal: Number
+    }),
+    orderTotal: Number,
+    orderDiscount: Number,
+    orderDiscountedTotal: Number,
+    amountPaid: Number,
+    paymentStatus: String,
+    delivaryStatus: String,
+    mop: String
+}
+
+return type: admin object
+
+#### delete order
+
+relative Url: /:id
+
+headers: None
+
+method: "DELETE"
+
+return type: json object
+
+#### get all orders
+
+relative Url: /all
+
+method: "GET"
+
+headers: None
+
+return type: list of order objects
+
+#### get single order
+
+relative Url: /:id
+
+method: "GET"
+
+headers: None
+
+return type: order object
+
 #### Further Api services will be updated soon ...
 thank you for your support
