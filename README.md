@@ -7,7 +7,7 @@ An Api for Ecommerce app using express and mongo DB database
 there are currently three api services for admins, subscribers and products
 
 ### Admins
-Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/admins/
+Base Url for admins is : https://ecommerce-back-end-orpin.vercel.app/api/admins/
 
 #### register admin
 
@@ -90,7 +90,7 @@ headers: None
 return type: admin object
 
 ### Categorys
-Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/category/
+Base Url for admins is : https://ecommerce-back-end-orpin.vercel.app/api/category/
 
 #### create product
 
@@ -161,19 +161,8 @@ method: "GET"
 
 return type: category object
 
-
-#### get single category image
-
-relative Url: /category_image/:id
-
-headers: None
-
-method: "GET"
-
-return type: image file
-
 ### Products
-Base Url for admins is : https://ecommerce-backend-new-api.vercel.app/api/products/
+Base Url for admins is : https://ecommerce-back-end-orpin.vercel.app/api/products/
 
 #### create product
 
@@ -252,19 +241,8 @@ method: "GET"
 return type: product object
 
 
-#### get single product image
-
-relative Url: /product_image/:id
-
-headers: None
-
-method: "GET"
-
-return type: image file
-
-
 ### Subscribers
-Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/subscribers/
+Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/subscribers/
 
 #### register subscriber
 
@@ -354,7 +332,7 @@ headers: None
 return type: subscriber object
 
 ### Orders
-Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/orders/
+Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/orders/
 
 #### create order
 
@@ -449,7 +427,7 @@ headers: None
 return type: order object
 
 ### Transactions
-Base Url for subscribers is : https://ecommerce-backend-new-api.vercel.app/api/transactions/
+Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/transactions/
 
 #### create transactions
 
