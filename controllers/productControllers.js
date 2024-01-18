@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 
-const path = require("path");
 const ProductsModel = require("../models/ProductsModel");
 
 function isNumeric(n) {
@@ -25,11 +24,9 @@ const createProduct = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Invalid retailPrice");
     }
-    let imagePath = "";
+    let image = "";
     if(req.file){
-        imagePath = req.file.path;
-    }else {
-        imagePath = path.join(__dirname, "products", "default.png");
+        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64url");
     }
     const product = await ProductsModel.create({
         name,
@@ -38,7 +35,7 @@ const createProduct = asyncHandler(async (req, res) => {
         categoryId,
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
-        imagePath,
+        image,
     });
     res.status(200).json(product);
 });
@@ -85,24 +82,4 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(200).json(updatedProduct);
 });
 
-const getProductImage = asyncHandler(async (req, res) => {
-    const product = await ProductsModel.findOne({ _id: req.params.id });
-    if(!product){
-        res.status(404);
-        throw new Error("Product not found");
-    }
-    const options = {
-        root: path.join(__dirname,"../")
-    };
-    const imagePath = product.imagePath;
-    const absPath = "/" + imagePath.split("\\")[0] + "/" + imagePath.split("\\")[1];
-    res.sendFile(absPath, options, function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Sent:', absPath);
-        }
-    });
-});
-
-module.exports = { createProduct, getAllProducts, getSingleProduct, updateProduct, deleteProduct, getProductImage };
+module.exports = { createProduct, getAllProducts, getSingleProduct, updateProduct, deleteProduct };

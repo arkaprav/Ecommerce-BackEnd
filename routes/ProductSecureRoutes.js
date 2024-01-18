@@ -3,15 +3,9 @@ const { createProduct, updateProduct, deleteProduct } = require("../controllers/
 const validateAdmin = require("../middlewares/validateAdmin");
 const router = express.Router();
 const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: './products',
-  filename: (req, file, cb) => {
-    cb(null, `${file.fieldname}-${Date.now()}.jpeg`);
-  },
+const upload = multer({
+  storage: multer.memoryStorage(),
 });
-
-const upload = multer({ storage });
 
 router.use(validateAdmin);
 router.use(upload.single("product_image"));

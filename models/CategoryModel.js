@@ -13,9 +13,9 @@ const CategorySchema = mongoose.Schema(
             type: Number,
             default: 0
         },
-        imagePath:{
+        image:{
             type: String,
-            required: [true, "ImagePath is required"],
+            required: [true, "Image is required"],
         },
     },{
         timestamps: true

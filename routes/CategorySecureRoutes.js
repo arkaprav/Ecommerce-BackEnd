@@ -3,15 +3,7 @@ const { createCategory, updateCategory, deleteCategory } = require("../controlle
 const validateAdmin = require("../middlewares/validateAdmin");
 const router = express.Router();
 const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: './products',
-  filename: (req, file, cb) => {
-    cb(null, `${file.fieldname}-${Date.now()}.jpeg`);
-  },
-});
-
-const upload = multer({ storage });
+const upload = multer();
 
 router.use(validateAdmin);
 router.use(upload.single("category_image"));

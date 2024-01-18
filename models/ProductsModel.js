@@ -25,9 +25,9 @@ const productsSchema = mongoose.Schema(
             type: Number,
             required: [true, "retailPrice is required"],
         },
-        imagePath:{
+        image:{
             type: String,
-            required: [true, "ImagePath is required"],
+            required: [true, "Image is required"],
         },
     },{
         timestmps: true

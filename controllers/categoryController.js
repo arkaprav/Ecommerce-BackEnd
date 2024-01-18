@@ -3,22 +3,26 @@ const asyncHandler = require("express-async-handler");
 const path = require("path");
 const CategoryModel = require("../models/CategoryModel");
 
+function base64_encode(file) {
+    var bitmap = fs.readFileSync(file);
+    return Buffer.from(bitmap, 'base64');
+}
+
+
 const createCategory = asyncHandler(async (req, res) => {
     const { name, description } = req.body;
     if(!name){
         res.status(401);
         throw new Error("Invalid name");
     }
-    let imagePath = "";
+    let image = "";
     if(req.file){
-        imagePath = req.file.path;
-    }else {
-        imagePath = path.join(__dirname, "products", "default.png");
+        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64url");
     }
     const category = await CategoryModel.create({
         name,
         description: description ? description : "",
-        imagePath,
+        image,
     });
     res.status(200).json(category);
 });
@@ -65,24 +69,4 @@ const updateCategory = asyncHandler(async (req, res) => {
     res.status(200).json(updatedCategory);
 });
 
-const getCategoryImage = asyncHandler(async (req, res) => {
-    const category = await CategoryModel.findOne({ _id: req.params.id });
-    if(!category){
-        res.status(404);
-        throw new Error("Category not found");
-    }
-    const options = {
-        root: path.join(__dirname,"../")
-    };
-    const imagePath = category.imagePath;
-    const absPath = "/" + imagePath.split("\\")[0] + "/" + imagePath.split("\\")[1];
-    res.sendFile(absPath, options, function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Sent:', absPath);
-        }
-    });
-});
-
-module.exports = { createCategory, getAllCategory, getSingleCategory, updateCategory, deleteCategory, getCategoryImage };
+module.exports = { createCategory, getAllCategory, getSingleCategory, updateCategory, deleteCategory };
