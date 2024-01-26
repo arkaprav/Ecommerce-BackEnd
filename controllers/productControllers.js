@@ -26,7 +26,7 @@ const createProduct = asyncHandler(async (req, res) => {
     }
     let image = "";
     if(req.file){
-        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64url");
+        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64");
     }
     const product = await ProductsModel.create({
         name,

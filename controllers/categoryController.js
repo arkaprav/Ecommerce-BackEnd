@@ -17,7 +17,7 @@ const createCategory = asyncHandler(async (req, res) => {
     }
     let image = "";
     if(req.file){
-        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64url");
+        image = 'data:image/png;base64,' +  req.file.buffer.toString("base64");
     }
     const category = await CategoryModel.create({
         name,
