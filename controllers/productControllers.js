@@ -7,7 +7,7 @@ function isNumeric(n) {
 }
 
 const createProduct = asyncHandler(async (req, res) => {
-    const { name, brand, description, categoryId, purchasePrice, retailPrice } = req.body;
+    const { name, brand, description, categoryId, purchasePrice, retailPrice, stock_qty } = req.body;
     if(!name){
         res.status(401);
         throw new Error("Invalid name");
@@ -24,6 +24,10 @@ const createProduct = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Invalid retailPrice");
     }
+    if(!isNumeric(stock_qty)){
+        res.status(401);
+        throw new Error("Invalid stock_qty");
+    }
     let image = "";
     if(req.file){
         image = 'data:image/png;base64,' +  req.file.buffer.toString("base64");
@@ -36,12 +40,13 @@ const createProduct = asyncHandler(async (req, res) => {
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
         image,
+        stock_qty: parseInt(stock_qty)
     });
     res.status(200).json(product);
 });
 
 const getAllProducts = asyncHandler(async (req, res) => {
-    const products = await ProductsModel.find();
+    const products = await ProductsModel.find().sort({ createdAt: -1 });
     res.status(200).json(products);
 });
 

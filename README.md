@@ -92,7 +92,7 @@ return type: admin object
 ### Categorys
 Base Url for admins is : https://ecommerce-back-end-orpin.vercel.app/api/category/
 
-#### create product
+#### create category
 
 relative Url: /secure/
 
@@ -181,7 +181,8 @@ data: {
     catgeoryId: String,
     purchasePrice: Number,
     retailPrice: Number,
-    product_image: Image File
+    product_image: Image File,
+    stock_qty: Number,
 }
 
 return type: product object
@@ -203,7 +204,8 @@ data: {
     catgeoryId: String,
     purchasePrice: Number,
     retailPrice: Number,
-    product_image: Image File
+    product_image: Image File,
+    stock_qty: Number
 }
 
 return type: product object

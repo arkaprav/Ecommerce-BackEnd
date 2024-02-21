@@ -29,6 +29,10 @@ const productsSchema = mongoose.Schema(
             type: String,
             required: [true, "Image is required"],
         },
+        stock_qty: {
+            type: Number,
+            default: 0
+        }
     },{
         timestmps: true
     }
