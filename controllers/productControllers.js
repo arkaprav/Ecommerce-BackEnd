@@ -35,7 +35,7 @@ const createProduct = asyncHandler(async (req, res) => {
     const product = await ProductsModel.create({
         name,
         description: description ? description : "",
-        brand,
+        brand: brand[0],
         categoryId,
         purchasePrice: parseFloat(purchasePrice),
         retailPrice: parseFloat(retailPrice),
