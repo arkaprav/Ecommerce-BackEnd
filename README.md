@@ -242,6 +242,15 @@ method: "GET"
 
 return type: product object
 
+## get category wise products
+
+relative Url: /category/:id
+
+headers: None
+
+method: "GET"
+
+return type: product object
 
 ### Subscribers
 Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/subscribers/
