@@ -39,6 +39,9 @@ const createProduct = asyncHandler(async (req, res) => {
             res.status(401);
             throw new Error("Category Not Found!!");
         }
+        const updateCategory = await CategoryModel.findByIdAndUpdate(categoryId, {
+            no_of_products: parseInt(category.no_of_products) + 1,
+        });
     }
     const product = await ProductsModel.create({
         name,
@@ -78,6 +81,10 @@ const deleteProduct = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Product not found");
     }
+    const category = await CategoryModel.findById(product.categoryId);
+    const updateCategory = await CategoryModel.findByIdAndUpdate(product.categoryId, {
+        no_of_products: parseInt(category.no_of_products) - 1,
+    });
     const deletedProduct = await ProductsModel.findByIdAndDelete(req.params.id);
     res.status(200).json(deletedProduct);
 });
