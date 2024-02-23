@@ -242,7 +242,7 @@ method: "GET"
 
 return type: product object
 
-## get category wise products
+#### get category wise products
 
 relative Url: /category/:id
 
