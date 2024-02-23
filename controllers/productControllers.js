@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
 const ProductsModel = require("../models/ProductsModel");
+const CategoryModel = require("../models/CategoryModel");
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -32,6 +33,13 @@ const createProduct = asyncHandler(async (req, res) => {
     if(req.file){
         image = 'data:image/png;base64,' +  req.file.buffer.toString("base64");
     }
+    if(categoryId){
+        const category = await CategoryModel.findById(categoryId);
+        if(!category){
+            res.status(401);
+            throw new Error("Category Not Found!!");
+        }
+    }
     const product = await ProductsModel.create({
         name,
         description: description ? description : "",
@@ -49,6 +57,11 @@ const getAllProducts = asyncHandler(async (req, res) => {
     const products = await ProductsModel.find().sort({ createdAt: -1 });
     res.status(200).json(products);
 });
+
+const getCategoryProducts = asyncHandler(async (req, res) => {
+    const products = await ProductsModel.find({ categoryId: req.params.id }).sort({ createdAt: -1 });
+    res.status(200).json(products);
+})
 
 const getSingleProduct = asyncHandler(async (req, res) => {
     const product = await ProductsModel.findOne({ _id: req.params.id });
@@ -87,4 +100,4 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(200).json(updatedProduct);
 });
 
-module.exports = { createProduct, getAllProducts, getSingleProduct, updateProduct, deleteProduct };
+module.exports = { createProduct, getAllProducts, getSingleProduct, getCategoryProducts, updateProduct, deleteProduct };
