@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const SubscribersModel = require("../models/SubscribersModel");
+const CouponsModel = require("../models/CouponsModel");
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -86,12 +87,28 @@ const updateSubscriber = asyncHandler(async (req, res) => {
         res.status(403);
         throw new Error("Subscriber not Found");
     }
-    const { password } = req.body;
+    const { password, coupon_used } = req.body;
     if(password){
         const hashedPass = await bcrypt.hash(password, 10);
         req.body = {
             ...req.body,
             password:hashedPass
+        }
+    }
+    if(coupon_used){
+        const coupon = await CouponsModel.findById(coupon_used);
+        if(!coupon){
+            res.status(401);
+            throw new Error("Invalid Coupon ID");
+        }
+        const alreadyUsed = JSON.parse(existsWithName.coupon_used)
+        if(alreadyUsed.includes(coupon_used)){
+            res.status(403);
+            throw new Error("Can't use this coupon again");
+        }
+        req.body = {
+            ...req.body,
+            coupon_used: JSON.stringify([...alreadyUsed, coupon_used]),
         }
     }
     const subscriber = await SubscribersModel.findByIdAndUpdate(req.params.id, req.body);

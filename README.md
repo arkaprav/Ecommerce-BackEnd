@@ -4,7 +4,7 @@
 An Api for Ecommerce app using express and mongo DB database
 
 ## Usage
-there are currently three api services for admins, subscribers and products
+there are currently eight api services for admins, categories, orders, transactions, events, coupons, subscribers and products
 
 ### Admins
 Base Url for admins is : https://ecommerce-back-end-orpin.vercel.app/api/admins/
@@ -272,7 +272,7 @@ data: {
     adminId: String(admins id in the browser)
 }
 
-return type: admin object
+return type: subscriber object
 
 #### login subscriber
 
@@ -293,7 +293,9 @@ return type: jwt authentication key
 
 relative Url: /:id
 
-headers: None
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
 
 method: "PUT"
 
@@ -303,16 +305,19 @@ data: {
     email: String,
     address: String,
     phone: String,
-    adminId: String(admins id in the browser)
+    adminId: String(admins id in the browser),
+    coupons_used: String(Coupon Id)
 }
 
-return type: admin object
+return type: subscriber object
 
 #### delete subscriber
 
 relative Url: /:id
 
-headers: None
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
 
 method: "DELETE"
 
@@ -349,7 +354,9 @@ Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/or
 
 relative Url: /
 
-headers: None
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
 
 method: "POST"
 
@@ -505,6 +512,120 @@ method: "GET"
 headers: None
 
 return type: transaction object
+
+### Events
+Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/events/
+
+#### create Events
+
+relative Url: /secure/
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "POST"
+
+data: {
+    event_image: Image,
+    name: String,
+    description: String,
+    startTime: DateTimeString(Optional),
+    endTime: DateTimeString,
+    offer: String,
+    couponId: String(Optional),
+    link: Hyperlink String
+}
+
+return type: event object
+
+#### delete event
+
+relative Url: /secure/:id
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "DELETE"
+
+return type: json object
+
+#### get all event
+
+relative Url: /all
+
+method: "GET"
+
+headers: None
+
+return type: list of event objects
+
+#### get single event
+
+relative Url: /:id
+
+method: "GET"
+
+headers: None
+
+return type: event object
+
+### Coupons
+Base Url for subscribers is : https://ecommerce-back-end-orpin.vercel.app/api/coupons/
+
+#### create Coupons
+
+relative Url: /secure/
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "POST"
+
+data: {
+    Id: String,
+    discount: Number,
+    startTime: DatetTimeString(Optional),
+    endTime: DatetTimeString,
+    categoryIds: List of Category IDs (Optional)
+    productIds: List of Product IDs (Optional)
+}
+
+return type: coupon object
+
+#### delete coupon
+
+relative Url: /secure/:id
+
+headers: {
+    Authorization: "Bearer __jwt_Authentication_key_after_login"
+}
+
+method: "DELETE"
+
+return type: json object
+
+#### get all coupon
+
+relative Url: /all
+
+method: "GET"
+
+headers: None
+
+return type: list of coupon objects
+
+#### get single coupon
+
+relative Url: /:id
+
+method: "GET"
+
+headers: None
+
+return type: event object
 
 
 #### Further Api services will be updated soon ...

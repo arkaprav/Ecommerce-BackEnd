@@ -26,6 +26,10 @@ const SubscriberSchema = mongoose.Schema(
             type: String,
             default: "[]"
         },
+        coupon_used: {
+            type: String,
+            default: "[]"
+        }
     },{
         timestamps: true
     }
