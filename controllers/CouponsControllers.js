@@ -41,18 +41,22 @@ const createCoupons = asyncHandler( async (req, res) => {
         res.status(401);
         throw new Error("Invalid End Time")
     }
+    if(!categoryId && !productId){
+        res.status(401);
+        throw new Error("Coupon Should be attached with either a categoy or a product");
+    }
     if(categoryId) {
         const category = await CategoryModel.findById(categoryId);
         if(!category) {
             res.status(401);
-            throw new Error("Coupon Should be attached with either a categoy or a product");
+            throw new Error("Invalid Category ID");
         }
     }
     if(productId) {
         const produuct = await ProductsModel.findById(productId);
         if(!produuct) {
             res.status(401);
-            throw new Error("Coupon Should be attached with either a categoy or a product");
+            throw new Error("Invalid Product ID");
         }
     }
     const data = {

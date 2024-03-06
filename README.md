@@ -589,8 +589,8 @@ data: {
     discount: Number,
     startTime: DatetTimeString(Optional),
     endTime: DatetTimeString,
-    categoryIds: List of Category IDs (Optional)
-    productIds: List of Product IDs (Optional)
+    categoryIds: Category ID (Optional)
+    productIds: Product ID (Optional)
 }
 
 return type: coupon object
@@ -625,7 +625,7 @@ method: "GET"
 
 headers: None
 
-return type: event object
+return type: coupon object
 
 
 #### Further Api services will be updated soon ...
